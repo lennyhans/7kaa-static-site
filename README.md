@@ -16,3 +16,4 @@ This is a proposed static site for the classic game Seven Kingdoms Ancient Adver
 
 All the images are from the original assets of the game (processed with Inkscape).
 
+![Image](https://github.com/lennyhans/7kaa-static-site/raw/main/screenshot.jpg)
