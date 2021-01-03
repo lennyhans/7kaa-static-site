@@ -44,6 +44,31 @@ body {
 
 }
 
+.secondary-container {
+    padding: .5em 5em;
+    position: relative;
+    z-index: 1;
+    background: #ebdcc9;
+    background: url('../img/background-noise.svg');
+}
+
+.secondary-container  p,
+.secondary-container  a,
+.secondary-container  h1,
+.secondary-container  h2,
+.secondary-container  h3 {
+    color: #000;
+    opacity: 0.85;
+}
+.secondary-container  a{
+    color: #42b3b8;
+}
+
+.secondary-container  p,
+.secondary-container  a{
+    font-family: Noto, Roboto, Verdana, Helvetica, Sans, sans-serif;
+}
+
 .main-img{
 	width: 100%;
 	max-width:100%;
@@ -51,12 +76,20 @@ body {
 }
 
 .button {
-    background-color: #antiquewhite;
+    background-color: antiquewhite;
     color: #000;
     opacity: 1;
     padding: 0.5em 2em;
     border-radius: 5px;
     display: inline-block;
+}
+
+.button > small {
+    font-size: .6em;
+    display: block;
+    padding: 0;
+    margin: auto;
+
 }
 
 .nav-button{
@@ -84,7 +117,6 @@ a.button-primary {
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover; 
-    padding: 1.56rem 2rem;
 }
 
 .splash-container {
@@ -117,7 +149,8 @@ a.button-primary {
 	height: 80%;
 	display:block;
 	margin-left: auto;
-	margin-right:auto;
+    margin-right:auto;
+    box-shadow: 0 0 50px rgba(0,0,0,.4);
 }
 
 .splash-head {
@@ -125,10 +158,22 @@ a.button-primary {
     font-weight: bold;
     color: white;
     
-    padding: 1em 1.6em;
+    padding: 0 1.6em;
     font-weight: 100;
     border-radius: 5px;
     line-height: 1em;
+}
+.brief-desc {
+    width: 100%;
+    color: #FFF;
+    background-color:rgba(0,0,0,.4);
+    margin:auto;
+    padding: 1em 0;
+    border-radius: 1px;
+}
+.brief-desc > p{
+    margin:0;
+    opacity: .8;
 }
 
 .content-wrapper {
@@ -169,39 +214,44 @@ a.button-primary {
         font-size: 16px;
     }
 
-		a.button-primary {
-			width: 22rem;
-			font-size: 2rem;
-		}
-		.nav-button{
-			padding: 1.3rem 2rem;
-			margin: 0 .5rem;
-			width: 11.5rem;
-		}
+    a.button-primary {
+        width: 16em;
+        font-size: 1.5em;
+    }
+    .nav-button{
+        padding: 1.3rem 2rem;
+        margin: 0 .5rem;
+        width: 11.5rem;
+    }
 
     .splash-head {
         font-size: 250%;
     }
-    
+    .main-img{
+        width: 80%;
+    }
+    .brief-desc{
+        width:80%
+    }
     .content-left, .content-right {
 			flex: 50%;
 			flex-direction:row;
 			justify-content: center;
-		}
-		.content-right {
-			text-align: right;
-			flex-flow:row-reverse;
-		}
-		
-		.content-wrapper {
-			min-height: 10%;
-		}
-		
-		.splash-container {
-			background: #333;
-			z-index: 1;
-			overflow: hidden;
-		}
+    }
+    .content-right {
+        text-align: right;
+        flex-flow:row-reverse;
+    }
+    
+    .content-wrapper {
+        min-height: 10%;
+    }
+    
+    .splash-container {
+        background: #333;
+        z-index: 1;
+        overflow: hidden;
+    }
 
 }
 
@@ -209,18 +259,21 @@ a.button-primary {
  * -- DESKTOP  -- */
 @media (min-width: 1366px) {
 
+    .brief-desc{
+        width: 50%
+    }
     .splash-head {
         font-size: 300%;
     }
     .main-img{
 			width: auto;
 			min-width: 70%;
-		}
+    }
     .in-game-screen > img {
 			width : auto;
 			max-width:100%;
 			height: auto;
-		}
+    }
 }
 
 
