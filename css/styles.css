@@ -16,6 +16,10 @@ Copyright 2021 Lenny Andreu
 
 */
 
+/**********
+Main Styles
+**********/
+
 * {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
@@ -92,7 +96,7 @@ body {
 
 }
 
-.nav-button{
+.nav-button {
 	padding: .8rem 2rem;
 	margin: 0.2rem 0;
 	background-image: url('../img/scroll.svg');
@@ -103,7 +107,7 @@ body {
   text-align: center;
 }
 
-a{
+a {
 	text-decoration: none;
 }
 a.button-primary {
@@ -207,7 +211,9 @@ a.button-primary {
 	flex-direction: column-reverse;
 }
 
-/*  Custom Scrollbar  */
+/****************
+Custom Scrollbar  
+****************/
 
 /* width */
 ::-webkit-scrollbar {
@@ -228,6 +234,10 @@ a.button-primary {
 ::-webkit-scrollbar-thumb:hover {
 	background-size: 24px;
 }
+
+/****************
+Responsive Styles
+****************/
 
 /* TABLET OR SMALL DESKTOP */
 @media (min-width: 768px) {
