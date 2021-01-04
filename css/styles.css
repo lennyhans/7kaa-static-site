@@ -214,7 +214,6 @@ a.button-primary {
   box-shadow: inset 0 0 5px grey; 
   border-radius: 10px;
 }
- 
 /* Handle */
 ::-webkit-scrollbar-thumb {
   background: antiquewhite; 
@@ -275,8 +274,7 @@ a.button-primary {
 
 }
 
-/*
- * -- DESKTOP  -- */
+/* -- DESKTOP  -- */
 @media (min-width: 1366px) {
 
     .brief-desc{
