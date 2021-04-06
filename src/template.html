@@ -1,0 +1,54 @@
+<!--
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <https://www.gnu.org/licenses
+
+Copyright 2021 Lenny Andreu
+-->
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0">
+	<meta name="theme-color" content="#333333">
+	<meta name="description" content="Seven kingdoms ancient adversaries PC game">
+    <meta name="keywords" content="seven kingdoms, ancient adversaries, pc, game, videogame, 7kaa, 7k">
+	
+	%sapper.base%
+
+	<link rel="stylesheet" href="global.css">
+	<link rel="manifest" href="manifest.json" crossorigin="use-credentials">
+	<link rel="icon" type="image/png" href="favicon.png">
+	<link rel="apple-touch-icon" href="logo-192.png">
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link href="https://fonts.googleapis.com/css2?family=Cinzel&display=swap" rel="stylesheet"> 
+
+	<!-- Sapper creates a <script> tag containing `src/client.js`
+	     and anything else it needs to hydrate the app and
+	     initialise the router -->
+	%sapper.scripts%
+
+	<!-- Sapper generates a <style> tag containing critical CSS
+	     for the current page. CSS for the rest of the app is
+	     lazily loaded when it precaches secondary pages -->
+	%sapper.styles%
+
+	<!-- This contains the contents of the <svelte:head> component, if
+	     the current page has one -->
+	%sapper.head%
+</head>
+<body>
+	<!-- The application will be rendered inside this element,
+	     because `src/client.js` references it -->
+	<div id="sapper">%sapper.html%</div>
+</body>
+</html>

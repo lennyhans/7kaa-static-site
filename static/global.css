@@ -1,0 +1,70 @@
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+html, body, #sapper 	{
+	height: 100%;
+	margin: 0;
+}
+
+body {
+    line-height: 1.7em;
+    color: #303030;
+    font-size: 13px;
+    font-family: 'Cinzel', serif;    
+}
+
+h1, h2, h3, h4, h5, h6 {
+	margin: 0 0 0.5em 0;
+	font-weight: 400;
+	line-height: 1.2;
+}
+
+a {
+	text-decoration: none;
+}
+a.button-primary {
+    background: #ddd;
+    color: #000;
+    display: inline-block;
+    opacity: 1;
+    border-radius: 5px;
+    font-size: 1.2rem;
+    background-image: url('button.svg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover; 
+}
+
+@media (min-width: 400px) {
+	body {
+		font-size: 16px;
+	}
+}
+
+/****************
+Custom Scrollbar  
+****************/
+
+/* width */
+::-webkit-scrollbar {
+    width: 13px;
+}
+/* Track */
+::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px grey; 
+    border-radius: 15px;
+}
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: antiquewhite; 
+    border-radius: 10px;
+    background-image: url("scrolbarpic.svg");
+    box-shadow: 0 0 2px grey;
+}
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background-size: 24px;
+}
