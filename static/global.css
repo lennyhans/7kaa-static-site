@@ -44,6 +44,31 @@ a.button-primary {
 	}
 }
 
+.content {
+    padding: .5em 5em;
+    position: relative;
+    z-index: 1;
+    background: #ebdcc9;
+    background: url('../img/background-noise.svg');
+}
+
+.content p,
+.content a,
+.content h1,
+.content h2,
+.content h3 {
+    color: #000;
+    opacity: 0.85;
+}
+.content a {
+    color: #42b3b8;
+}
+
+.content p,
+.content a {
+    font-family: Noto, Roboto, Verdana, Helvetica, Sans, sans-serif;
+}
+
 /****************
 Custom Scrollbar  
 ****************/
