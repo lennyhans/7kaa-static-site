@@ -43,7 +43,7 @@
 		content: '';
 		width: calc(100% - 1em);
 		height: 2px;
-		background-color: rgb(255,62,0);
+		background-color: rgb(66, 179, 184);
 		display: block;
 		bottom: 25%;
 	}
