@@ -6,7 +6,7 @@
 		{ name : "source", link : "source"},
 		{ name : "downloads", link : "download"},
 		{ name : "community", link: "community", prefetch : true},
-		{ name : "news", link : "blog", prefetch : true}
+		{ name : "news", link : "news", prefetch : true}
 	];
 </script>
 
