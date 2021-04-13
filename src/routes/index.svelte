@@ -24,7 +24,18 @@
 </script>
 
 <style>
-
+.separator {
+		width: 100%;
+		background: antiquewhite;
+		left: 0;
+		background-image: url('/navbar.svg');
+		background-size: contain;
+		background-position: left;
+		background-repeat: repeat-x;
+		min-height: 4.5em;
+		bottom: 4.5em;
+		position:relative;
+	}
 </style>
 
 <svelte:head>
@@ -32,7 +43,9 @@
 </svelte:head>
 
 <Splash {latestVersion} {gameBrief}/>
-<!-- TODO INSERT SEPARATOR -->
+<div class="separator">
+
+</div>
 <section class="content">
 <h1 id="#play-online">Play Seven Kingdoms </h1>
 <div id="entry-0" class="entry">

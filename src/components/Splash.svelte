@@ -71,7 +71,7 @@
 		background-repeat: no-repeat;
 		background-size: cover;
 		background-color: #333;
-		min-height: 100%;
+		min-height: 93%;
 	}
 
 	@media (max-height: 400px) {
