@@ -1,7 +1,19 @@
+<script context="module">
+	
+
+	export function preload() {
+		return this.fetch(`download/latest.json`).then(r => r.json()).then(versions => {
+			return { versions };
+		});
+	}	
+</script>
+
 <script>
 	import Splash from '../components/Splash.svelte';
-	export let latestVersion = "2.15.4p1";
+	export let versions;
+	export let latestVersion = versions.title; // "2.15.4p1"
 	export let gameBrief = "Enter the world of intrigue and diplomacy, of trade, conquest, and espionage.";
+
 	let Date = "";
 	let Content = "";
 	let Author = "";
