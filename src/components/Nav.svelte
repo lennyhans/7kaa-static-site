@@ -2,8 +2,8 @@
 	export let segment;
 	export const navEntries = [
 		{ name : "about", link : "about"},
-		{ name : "forums", link : "forums"},
-		{ name : "source", link : "source"},
+		{ name : "forums", link : "https://7kfans.com/forums"},
+		{ name : "source", link : "https://github.com/the3dfxdude/7kaa"},
 		{ name : "downloads", link : "download"},
 		{ name : "community", link: "community", prefetch : true},
 		{ name : "news", link : "news", prefetch : true}
