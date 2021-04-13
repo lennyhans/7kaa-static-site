@@ -25,7 +25,6 @@
 </svelte:head>
 
 <section>
-<h1>News</h1>
 <ul>
 	{#each posts as post}
 		<!-- we're using the non-standard `rel=prefetch` attribute to
