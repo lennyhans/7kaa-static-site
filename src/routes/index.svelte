@@ -1,7 +1,7 @@
 <script>
-	import successkid from 'images/successkid.jpg';
 	import Splash from '../components/Splash.svelte';
 	export let latestVersion = "2.15.4p1";
+	export let gameBrief = "Enter the world of intrigue and diplomacy, of trade, conquest, and espionage.";
 	let Date = "";
 	let Content = "";
 	let Author = "";
@@ -19,7 +19,7 @@
 	<title>Seven Kingdoms Fans</title>
 </svelte:head>
 
-<Splash {latestVersion}/>
+<Splash {latestVersion} {gameBrief}/>
 <!-- TODO INSERT SEPARATOR -->
 <section class="content">
 <h1 id="#play-online">Play Seven Kingdoms </h1>

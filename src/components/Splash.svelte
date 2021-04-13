@@ -118,7 +118,7 @@
 			<img class="main-img" alt="Seven Kingdoms Acient Adversaries Logo" src={skaaLogo} />
 		</h1>
 		<h2 class="brief-desc">
-			<p>{gameBrief}The great RTS brief description</p>
+			<p>{gameBrief}</p>
 		</h2>
 		<p>
 			<a href="download/latest" class="button button-primary">Play Now
