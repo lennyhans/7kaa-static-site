@@ -11,12 +11,13 @@
 </script>
 
 <style>
-	ul {
-		margin: 0 0 1em 0;
-		line-height: 1.5;
+	a {
+		font-family: inherit;
 	}
-	li{
-		text-decoration: none;
+	small {
+		color: rgba(0,0,0,.7);
+		background: #EEE;
+		padding: 0 .3em;
 	}
 </style>
 
@@ -24,18 +25,19 @@
 	<title>News</title>
 </svelte:head>
 
-<section>
-<ul>
-	{#each posts as post}
-		<!-- we're using the non-standard `rel=prefetch` attribute to
-				tell Sapper to load the data for the page as soon as
-				the user hovers over the link or taps it, instead of
-				waiting for the 'click' event -->
-		<li>
-			<h2><a rel="prefetch" href="news/{post.slug}">{post.title}</a></h2>
-			<article class="summary">{@html post.summary}</article>
-			<p><small>{new Date(post.date).toDateString()}</small></p>
-		</li>
-	{/each}
-</ul>
+<section class="content">
+
+{#each posts as post}
+	<!-- we're using the non-standard `rel=prefetch` attribute to
+			tell Sapper to load the data for the page as soon as
+			the user hovers over the link or taps it, instead of
+			waiting for the 'click' event -->
+	<article>
+		<h2><a rel="prefetch" href="news/{post.slug}">{post.title}</a> 
+			<small>{new Date(post.date).toDateString()}</small>
+		</h2>
+		<div class="summary">{@html post.summary}</div>
+		<p></p>
+	</article>
+{/each}
 </section>
