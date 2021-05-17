@@ -17,6 +17,8 @@ This is a proposed static site for the classic game Seven Kingdoms Ancient Adver
 All the images are from the original assets of the game (processed with Inkscape).
 
 ## Sapper related (from template)
+To generate the site `node` and `npm` is required, you can check it out at nodejs [page](https://nodejs.org/en/), then you can try the rest of steps
+
 Install dependencies
 ```bash
 npm install
