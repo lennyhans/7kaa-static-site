@@ -1,10 +1,9 @@
 import features from './_features.js';
 
+
 const contents = JSON.stringify(features.map(feature => {
 	return {
-		title: feature.title,
-        slug : feature.slug,
-        html: feature.html
+		...feature
 	};
 }));
 
