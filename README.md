@@ -16,47 +16,28 @@ This is a proposed static site for the classic game Seven Kingdoms Ancient Adver
 
 All the images are from the original assets of the game (processed with Inkscape).
 
-![Image](https://github.com/lennyhans/7kaa-static-site/raw/main/screenshot.jpg)
-
 ## Sapper related (from template)
+Install dependencies
+```bash
+npm install
+```
+To run on development, after it should be running on [localhost:3000](http://localhost:3000)
+```bash
+npm run dev
+```
+The static site is generated with 
+```
+npx sapper export
+```
+And the folder `__sapper__/export` should have all the necessary files to publish the static site
 
 MIT Licensed
 
+Sapper docs on [sapper.svelte.dev](https://sapper.svelte.dev)
+
 The default template for setting up a [Sapper](https://github.com/sveltejs/sapper) project. Can use either Rollup or webpack as bundler.
 
-### Running the project
-
-Once you have created the project, install dependencies and run the project in development mode:
-
-```bash
-cd my-app
-npm install # or yarn
-npm run dev
-```
-
-This will start the development server on [localhost:3000](http://localhost:3000). Open it and click around.
-
-You now have a fully functional Sapper project! To get started developing, consult [sapper.svelte.dev](https://sapper.svelte.dev).
-
-### Using TypeScript
-
-By default, the template uses plain JavaScript. If you wish to use TypeScript instead, you need some changes to the project:
-
- * Add `typescript` as well as typings as dependences in `package.json`
- * Configure the bundler to use [`svelte-preprocess`](https://github.com/sveltejs/svelte-preprocess) and transpile the TypeScript code.
- * Add a `tsconfig.json` file
- * Update the project code to TypeScript
-
-The template comes with a script that will perform these changes for you by running
-
-```bash
-node scripts/setupTypeScript.js
-```
-
-`@sapper` dependencies are resolved through `src/node_modules/@sapper`, which is created during the build. You therefore need to run or build the project once to avoid warnings about missing dependencies.
-
-The script does not support webpack at the moment.
-
+_The next sections probably are not relevant unless you are interested in svelte/sapper configurations and dev_
 ## Directory structure
 
 Sapper expects to find two directories in the root of your project —  `src` and `static`.
@@ -66,6 +47,7 @@ Sapper expects to find two directories in the root of your project —  `src` an
 
 The [src](src) directory contains the entry points for your app — `client.js`, `server.js` and (optionally) a `service-worker.js` — along with a `template.html` file and a `routes` directory.
 
+There is also a folder called `content`, that contains the markdown data for the pages (content actually), it is a WIP 
 
 #### src/routes
 
