@@ -28,7 +28,7 @@
 		width: 100%;
 		background: antiquewhite;
 		left: 0;
-		background-image: url('/navbar.svg');
+		background-image: url('/img/navbar.svg');
 		background-size: contain;
 		background-position: left;
 		background-repeat: repeat-x;

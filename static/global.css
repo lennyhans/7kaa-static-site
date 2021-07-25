@@ -14,6 +14,8 @@ body {
     color: #303030;
     font-size: 13px;
     font-family: 'Cinzel', serif;    
+    background-color: #ebdcc9;
+    background-image: url('img/background-noise.svg');
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -32,7 +34,7 @@ a.button-primary {
     opacity: 1;
     border-radius: 5px;
     font-size: 1.2rem;
-    background-image: url('button.svg');
+    background-image: url('img/button.svg');
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover; 
@@ -48,8 +50,6 @@ a.button-primary {
     padding: .5em 5em;
     position: relative;
     z-index: 1;
-    background: #ebdcc9;
-    background: url('../img/background-noise.svg');
 }
 
 .content p,
@@ -86,7 +86,7 @@ Custom Scrollbar
 ::-webkit-scrollbar-thumb {
     background: antiquewhite; 
     border-radius: 10px;
-    background-image: url("scrolbarpic.svg");
+    background-image: url("img/scrolbarpic.svg");
     box-shadow: 0 0 2px grey;
 }
 /* Handle on hover */

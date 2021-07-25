@@ -59,7 +59,7 @@
 		width: 100%;
 		background: antiquewhite;
 		left: 0;
-		background-image: url('/navbar.svg');
+		background-image: url('/img/navbar.svg');
 		background-size: contain;
 		background-position: left;
 		background-repeat: repeat-x;
@@ -68,7 +68,7 @@
 	.nav-button {
 		padding: 0 0;
 		margin: 0.2rem 0;
-		background-image: url('/scroll.svg');
+		background-image: url('/img/scroll.svg');
 		background-size: cover;
 		background-position: left;
 		background-repeat: no-repeat;
