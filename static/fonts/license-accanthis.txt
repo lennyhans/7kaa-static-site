@@ -1,0 +1,44 @@
+    The Accanthis collection consists of fonts made by Arkandis Digital
+    Foundry (ADF), collectively known as the "Program"
+
+    This program is free software; you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation; either version 2 of the License, or any later 
+    version, with font exception.
+
+   As a special exception, if you create a document which uses Accanthis 
+   font, and embed this font or unaltered portions of this font into the
+   document, this font does not by itself cause the resulting document to
+   be covered by the GNU General Public License. This exception does not
+   however invalidate any other reasons why the document might be covered
+   by the GNU General Public License. If you modify this font, you may
+   extend this exception to your version of the font, but you are not
+   obligated to do so. If you do not wish to do so, delete this exception
+   statement from your version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program; if not, write to the Free Software
+    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+
+_____________________________________________________________________________________
+     RELEASE - 
+	0.000 - First draw (Marsh 2006)
+	1.000 - Initial release (November 2008)
+	1.001 - Modifications:v,w, minors corrections, add: r.end, fj, ffj.
+	1.002 - Minor modifications, a.end, e.end, n.end, r.end, t.end.
+	1.003 - Minor modifications (uni2116, ampersand) and new hinting adjustement.
+	1.004 - Minor corrections
+	1.005 - Modifications: A,M,R (canonical). Hinting ajustement
+	1.006 - Modifications: M,N,R and minor corrections
+	1.007 - Typographical glyphs, ft liga addition,
+	1.008 - Minor corrections.
+______________________________________________________________________________________
+
+
+
+
