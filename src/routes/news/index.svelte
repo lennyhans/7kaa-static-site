@@ -16,7 +16,7 @@
 	}
 	small {
 		color: rgba(0,0,0,.7);
-		background: #EEE;
+		background: #CCC;
 		padding: 0 .3em;
 	}
 </style>
