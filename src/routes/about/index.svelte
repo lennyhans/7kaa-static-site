@@ -9,6 +9,7 @@
 <script>
 	export let features;
 	let id = ""
+
 </script>
 
 
@@ -24,12 +25,10 @@
 		You may find GPL versions of 7KAA and patches for 7K2 to improve on the longevity of this great series.</p>
 </section>
 
-{#each features as feature}
 <section class="content">
-	<h2 id="{feature.slug}"><a href="about/#{feature.slug}" >#</a> {feature.title}</h2>
-	<div>
+{#each features as feature} 
+	<article>
 		{@html feature.html}
-	</div>
-</section>
+	</article>
 {/each}
-
+</section>
