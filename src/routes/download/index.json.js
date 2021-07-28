@@ -1,15 +1,6 @@
 import versions from './_versions';
 
-const contents = JSON.stringify(versions.map(v => {
-	return {
-		title: v.title,
-        slug : v.slug,
-        description: v.description,
-		releaseNotes: v.releaseNotes,
-		date : v.date,
-		releases : v.releases
-	};
-}));
+const contents = JSON.stringify(versions.map(v => v));
 
 export function get(req, res) {
 	res.writeHead(200, {
