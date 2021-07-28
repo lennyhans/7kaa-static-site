@@ -16,17 +16,6 @@
 		background: #CCC;
 		padding: 0 .3em;
 	}
-
-	h2 > small
-	  {
-		color: rgba(0,0,0,.7);
-		background: #CCC;
-		padding: 0 .3em;
-	}
-	hr{
-		border-bottom: rgba(0,0,0,.8) solid .1em;
-		border-top: 0;
-	}
 </style>
 
 <svelte:head>
