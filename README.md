@@ -16,4 +16,23 @@ This is a proposed static site for the classic game Seven Kingdoms Ancient Adver
 
 All the images are from the original assets of the game (processed with Inkscape).
 
-![Image](https://github.com/lennyhans/7kaa-static-site/raw/main/screenshot.jpg)
+## Site generation
+You need perl to prepare the site, that can be checked out with
+
+```shell
+perl --version
+```
+
+So to prepare the site just run
+```shell
+perl gensite.pl
+```
+
+or
+
+```shell
+./gensite.pl
+```
+
+That should make appear the `out` directory which have all the files to host the static site, in fact you can check 
+the site opening every file or navigating by the web site itself
