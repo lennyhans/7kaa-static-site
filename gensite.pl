@@ -1,5 +1,23 @@
 #!/usr/bin/perl
 
+=for comment
+  Copyright 2021 Jesse Allen
+
+  This program is free software: you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation, either version 2 of the License, or
+  (at your option) any later version.
+
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
+
+  You should have received a copy of the GNU General Public License
+  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+=cut
+
 use warnings;
 use strict;
 
@@ -12,7 +30,7 @@ my $outdir = "out";
 my $STATIC_FOLDER  = "src/static";
 my $TEMPLATE_FOLDER = "src/templates";
 my $CONTENT_FOLDER = "src/content";
-my @STATIC_FOLDER_ASSETS = ("css", "img");
+my @STATIC_FOLDER_ASSETS = ("css", "img", "fonts");
 
 mkdir($outdir);
 foreach my $folder (@STATIC_FOLDER_ASSETS) {
@@ -24,6 +42,7 @@ my $template;
 my $article_in;
 my $outfile;
 my %vars;
+my $version = "2.15.4p1";
 
 my @articles = (
 ["Download Seven Kingdoms","latest.md","latest.html"],
@@ -45,6 +64,7 @@ sub init_index {
   $template_file = "$TEMPLATE_FOLDER/index.html";
   $template = Text::Template->new(TYPE => 'FILE',  SOURCE => $template_file);
   %vars = ();
+  $vars{title} = $version;
   $article_in = "$CONTENT_FOLDER/index.md";
   $outfile = "$outdir/index.html";
 }
