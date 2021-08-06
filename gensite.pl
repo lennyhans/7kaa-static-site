@@ -63,7 +63,7 @@ sub next_article {
   }
   
   my $params = shift(@articles);
-  print "$CONTENT_FOLDER/$params->[1]";
+
   $vars{title} = $params->[0];
   $article_in = "$CONTENT_FOLDER/$params->[1]";
   $outfile = "$outdir/$params->[2]";
