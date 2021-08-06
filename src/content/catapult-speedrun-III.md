@@ -1,7 +1,7 @@
 ---
 title: 'Catapult III Speed Run'
 authors: '["Infectorpp", "Ra"]'
-created: '2016-06-07?'
+created: '2016-06-07‎'
 updated : '2021-04-01'
 ---
 ## Catapult III Speed Run
@@ -40,4 +40,4 @@ So if you start with a natural resource nearby and intend to mine ore or import 
 
 By circa year 4 and 1/2, you should have 2 forts full of Catapults or more depending on how many war factories you built.
 
-_Originally by Infectorpp on 7 June 2016?_, _Adapted by Ra 2021_
+_Originally by Infectorpp on 7 June 2016‎_, _Adapted by Ra 2021_
