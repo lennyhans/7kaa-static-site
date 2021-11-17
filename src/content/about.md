@@ -1,4 +1,3 @@
-About the game
 ---
 ---
 ## [#](/about/#the-people) The People
