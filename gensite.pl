@@ -31,23 +31,6 @@ use GreyMatterExtractor;
 
 # my $filename = 'src/content/news/0-release-2-15-4.md';
 
-# my $some_dir = "src/content" ;
-
-# my @content_folder = get_content_directories($some_dir);
-# my @content_main_files = get_content_files($some_dir);
-
-# for (@content_main_files){
-# 		print "content_main_files : is $_\n";
-# }
-
-#  for (@content_folder){
-#  	print "\$_ is $_\n";
-#  	my @content_folder_files = get_content_files($_);
-#  	for (@content_folder_files){
-#  		print "\t\t\ content_folder_files -> \$_ is $_\n";
-#  	}
-#  }
-
 # #die "OpenDIR";
 # # This returns a Hash with ( "Header", "Body" )
 # my %greymatteredFile = read_header($filename);
@@ -81,12 +64,42 @@ my $outfile;
 my %vars;
 my $version = "2.15.4p1";
 
+
+
 my @articles = (
-["Download Seven Kingdoms","latest.md","latest.html"],
-["Play Seven Kingdoms","play.md","play.html"],
-["About Seven Kingdoms","about.md","about.html"],
-["Catapult III Speed Run","community/catapult-speedrun-III.md","community.html"],
+#["Download Seven Kingdoms","latest.md","latest.html"],
+#["Play Seven Kingdoms","play.md","play.html"],
+#["About Seven Kingdoms","about.md","about.html"],
+#["Catapult III Speed Run","community/catapult-speedrun-III.md","community.html"],
 );
+
+my @content_folder = get_content_directories($CONTENT_FOLDER);
+my @content_main_files = get_content_files($CONTENT_FOLDER);
+
+for (@content_main_files){
+	#print "content_main_files : is $_\n";{}
+	if($_ eq "index.html"){
+		next;
+	}
+	my $output_name = replace_extension_to_html($_);
+	#print ("$string \n");
+	push(@articles, ["{title}", $_, $output_name] );
+}
+
+for (@content_folder){
+	print "\$_ is $_\n";
+	my $curent_folder = $_;
+	my @content_folder_files = get_content_files("$CONTENT_FOLDER/$_");
+	for (@content_folder_files){
+		my $output_name = replace_extension_to_html($_);
+		push(@articles, ["{title}", "$curent_folder/$_", "$curent_folder/$output_name"] );
+		if(! -d "$outdir/$curent_folder"){
+			mkdir("$outdir/$curent_folder")
+		}
+		print "\t\t\ content_folder_files -> \$_ is $_ and output_name : $curent_folder/$output_name\n";
+	}
+}
+
 init_index();
 write_page();
 
@@ -125,6 +138,7 @@ sub next_article {
 	$vars{title} = $params->[0];
 	$article_in = "$CONTENT_FOLDER/$params->[1]";
 	$outfile = "$outdir/$params->[2]";
+	
 	return 1;
 }
 
@@ -205,6 +219,10 @@ sub write_page {
 		}
 		
 		#print "The Body is for $article_in is \n\n $testBody \n\n";
+		#print "OURDIR : $outdir";
+		#if( -f "$outdir/" )
+
+
 		my $tempFileName = "temp.md";
 		open(my $fh, ">", $tempFileName)
     	or die "Can't open > $tempFileName: $!";
@@ -240,7 +258,7 @@ sub get_content_directories {
 	while (my $dir_entry = readdir($dir_handler)) {
 		next if should_skip_current_prev_dir($dir_entry);
 		if(-d "$directory_to_check/$dir_entry" ){
-			push(@detected_directories, "$directory_to_check/$dir_entry" );
+			push(@detected_directories, $dir_entry );
 		}
 	}
 	closedir($dir_handler);
@@ -256,7 +274,7 @@ sub get_content_files {
 	while (my $dir_entry = readdir($dir_handler)) {
 		next if should_skip_current_prev_dir($dir_entry);
 		if(-f "$directory_to_check/$dir_entry" ){
-			push(@detected_files, "$directory_to_check/$dir_entry" );
+			push(@detected_files, $dir_entry );
 		}
 
 	}
@@ -267,4 +285,15 @@ sub get_content_files {
 sub should_skip_current_prev_dir {
 	my ($directory_to_check) = @_;
 	return $directory_to_check eq "." || $directory_to_check eq "..";
+}
+
+sub replace_extension_to_html {
+	my ($output_name) = @_;
+
+	if(! defined $output_name){
+		return @_;
+	}
+	# Try match and replace the last ".extension "
+	$output_name =~ s/(\.\w.$)\b/.html/io;
+	return $output_name;
 }
