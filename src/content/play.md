@@ -1,14 +1,13 @@
-Play Seven Kingdoms
 ---
+title: 'Play Seven Kingdoms'
 ---
-
-
+# Play Seven Kingdoms
 ## [#](#with-your-friends) With your friends
 The game supports playing with up to 7 players over the internet. Are you ready to try your skill against other opponents? You'll have many of your memorable moments in the game when playing with others.
 
 Install the latest version of the game. The old 2.0 original game release versions from the 90's had desync issues, and are no longer used. The latest version of the game will be what other people will have. Playing mixed versions is not possible, so it is best to use the latest version.
 
-Next register a forum account. This will allow you to list the game through 7kfans.com for others to find. When you login and create a game when clicking 7kfans.com as the service. When using 7kfans.com the advantage will be for automatic NAT traversal, allowing you to play when a firewall is enabled.
+Next register a [forum account](https://www.7kfans.com/forums/). This will allow you to list the game through 7kfans.com for others to find. When you login and create a game when clicking 7kfans.com as the service. When using 7kfans.com the advantage will be for automatic NAT traversal, allowing you to play when a firewall is enabled.
 
 To find opponents to play with, go to the forum. Post a message in chat, or go to popular community sites where players arrange times for matches. There is an active community of players eager to play.
 

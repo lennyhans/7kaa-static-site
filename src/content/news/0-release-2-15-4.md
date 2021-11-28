@@ -1,8 +1,8 @@
 ---
 title: 'Seven Kingdoms v2.15.4'
 slug: 'seven-kingdoms-v2-15-4'
-author : 'the3dfxdude'
-date : '2020-07-04'
+author: 'the3dfxdude'
+date: '2020-07-04'
 summary : 'Time for a new release! This fixes the issue with a freeze after playing long multiplayer games. If you had turned off CRC checking, please turn it back on. Other than that, multiplayer has been very smooth. This means we can start playing some bigger matches — I want to see them.'
 order: 0
 ---

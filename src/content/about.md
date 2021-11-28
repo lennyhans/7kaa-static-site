@@ -1,5 +1,7 @@
 ---
+title: 'About Seven Kingdoms'
 ---
+# Know about Seven Kingdoms
 ## [#](/about/#the-people) The People
 In the beginning, there are seven kings for seven peoples ... _but in the end, only one may rule_.
 
