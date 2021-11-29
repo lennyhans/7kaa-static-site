@@ -1,7 +1,10 @@
 ---
 title: 'About Seven Kingdoms'
 ---
-# Know about Seven Kingdoms
+# About 7k Fans
+
+The Seven Kingdoms Fan-site is the gathering place for fans of any of the Seven Kingdoms Series computer games by Enlight Software. Here you can share details of the games and find opponents. This is also home of the community supported open source releases. You may find GPL versions of 7KAA and patches for 7K2 to improve on the longevity of this great series.
+
 ## [#](/about/#the-people) The People
 In the beginning, there are seven kings for seven peoples ... _but in the end, only one may rule_.
 
