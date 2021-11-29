@@ -20,3 +20,6 @@ The game uses the UDP ports of 19255 and 19383. This is not the same as the orig
 Most issues stem from using too strict of a firewall. Make sure you allow the 7kaa.exe game application through your firewall, and do not block the in-going and out-going traffic on those ports. The ports may change if they are in use. Also, port-forwarding is not required because NAT traversal will handle it.
 
 Lastly, being a peer-to-peer game, the maximum latency between peers for smooth game play is 500ms. The speed of the connection does not matter on modern broadband internet.
+
+## [#](#get-the-code) Get the code
+You can also reach the [source](https://github.com/the3dfxdude/7kaa) and get involved or just learn what is behind the scenes
