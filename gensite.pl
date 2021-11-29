@@ -29,23 +29,6 @@ use Text::Markdown 'markdown';
 use YAML::Tiny;
 use GreyMatterExtractor;
 
-# my $filename = 'src/content/news/0-release-2-15-4.md';
-
-# #die "OpenDIR";
-# # This returns a Hash with ( "Header", "Body" )
-# my %greymatteredFile = read_header($filename);
-# # Open the config
-# my $yaml = YAML::Tiny->read_string( $greymatteredFile{Header} );
-# my $testBodyContent = $greymatteredFile{Body};
-
-# # Get a reference to the first document
-# my $config = $yaml->[0];
-# # Or read properties directly
-# my $title = $yaml->[0]->{title};
-# print "This is title", $title ,"\n";
-# print "The Body is \n\n $testBodyContent \n\n";
-#die "Test";
-
 my $outdir = "out";
 my $STATIC_FOLDER  = "src/static";
 my $TEMPLATE_FOLDER = "src/templates";
@@ -87,7 +70,7 @@ for (@content_main_files){
 }
 
 for (@content_folder){
-	print "\$_ is $_\n";
+	#print "\$_ is $_\n";
 	my $curent_folder = $_;
 	my @content_folder_files = get_content_files("$CONTENT_FOLDER/$_");
 	for (@content_folder_files){
@@ -96,7 +79,7 @@ for (@content_folder){
 		if(! -d "$outdir/$curent_folder"){
 			mkdir("$outdir/$curent_folder")
 		}
-		print "\t\t\ content_folder_files -> \$_ is $_ and output_name : $curent_folder/$output_name\n";
+		#print "\t\t\ content_folder_files -> \$_ is $_ and output_name : $curent_folder/$output_name\n";
 	}
 }
 
@@ -110,11 +93,22 @@ while(next_article()) {
 
 exit 0;
 
+sub init_partial {
+	my ($partial_name, %template_variables) = @_;
+	my $template_file = "$TEMPLATE_FOLDER/$partial_name";
+	my $template = Text::Template->new(TYPE => 'FILE',  SOURCE => $template_file);
+	
+	return $template->fill_in(HASH => \%template_variables);
+}
+
 sub init_index {
 	$template_file = "$TEMPLATE_FOLDER/index.html";
 	$template = Text::Template->new(TYPE => 'FILE',  SOURCE => $template_file);
 	%vars = ();
-	$vars{title} = $version;
+	$vars{title} = "Seven Kingdoms Ancient Adversaries";
+	$vars{menu} = init_partial("_menu.html", (home => 1) );
+
+
 	$article_in = "$CONTENT_FOLDER/index.md";
 	$outfile = "$outdir/index.html";
 }
@@ -123,6 +117,7 @@ sub init_article {
 	$template_file = "$TEMPLATE_FOLDER/article.html";
 	$template = Text::Template->new(TYPE => 'FILE',  SOURCE => $template_file);
 	%vars = ();
+	$vars{menu} = init_partial("_menu.html", (home => 0) );
 	$article_in = "";
 	$outfile = "";
 }
@@ -194,7 +189,7 @@ sub write_page {
 		#print "The Header is (YAML):  $article_in_matter{Header} \n";
 		my $yamls = undef;
 		# Prevent die thanks to https://stackoverflow.com/a/451236
-		eval { $yamls = YAML::Tiny->read_string( $article_in_matter{Header} ) }; warn "\t[WW] Uanble to read YAML\n" if $@;
+		eval { $yamls = YAML::Tiny->read_string( $article_in_matter{Header} ) }; warn "\t[WW] Unable to read YAML\n" if $@;
 		if( !defined $yamls )
 		{
 			print "\t[II] YAML Header is not defined\n";
@@ -207,7 +202,6 @@ sub write_page {
 		# updated : '2021-04-01'
 
 		my $testBody = $article_in_matter{Body};
-		
 		my $config = $yamls->[0];	
 		# TODO: How to add automatically the values of the hash to the vars hash?
 		if ( defined $config->{title}){
@@ -217,30 +211,22 @@ sub write_page {
 		}else{
 			print "\t[II] No header Info (YAML)\n"
 		}
-		
 		#print "The Body is for $article_in is \n\n $testBody \n\n";
 		#print "OURDIR : $outdir";
 		#if( -f "$outdir/" )
 
-
-		my $tempFileName = "temp.md";
-		open(my $fh, ">", $tempFileName)
-    	or die "Can't open > $tempFileName: $!";
-
-		print $fh $testBody;
-		close $fh;
-
 		# TODO: Read format from original file (ex. could be a markdown or html)
-		$vars{article} = markdown(slurp($tempFileName));
+		$vars{article} = markdown($testBody);
+		
 	}
-
+	$vars{head} = init_partial("_head.html", %vars);
 	my $fh;
 	if (!open($fh, ">", $outfile)) {
 		return;
 	}
 	print $fh $template->fill_in(HASH => \%vars);
 	close($fh);
-	print "\t--> OK\n";
+	#print "\t--> OK\n";
 	return;
 }
 
