@@ -44,17 +44,17 @@ my $template_file;
 my $template;
 my $article_in;
 my $outfile;
+my $article_folder;
 my %vars;
+# TODO: Read the version from somewhere
 my $version = "2.15.4p1";
 
+my ($base_path) = @ARGV;
+if( !defined $base_path) {
+	$base_path = "/";
+}
 
-
-my @articles = (
-#["Download Seven Kingdoms","latest.md","latest.html"],
-#["Play Seven Kingdoms","play.md","play.html"],
-#["About Seven Kingdoms","about.md","about.html"],
-#["Catapult III Speed Run","community/catapult-speedrun-III.md","community.html"],
-);
+my @articles = ();
 
 my @content_folder = get_content_directories($CONTENT_FOLDER);
 my @content_main_files = get_content_files($CONTENT_FOLDER);
@@ -75,7 +75,7 @@ for (@content_folder){
 	my @content_folder_files = get_content_files("$CONTENT_FOLDER/$_");
 	for (@content_folder_files){
 		my $output_name = replace_extension_to_html($_);
-		push(@articles, ["{title}", "$curent_folder/$_", "$curent_folder/$output_name"] );
+		push(@articles, ["{title}", "$curent_folder/$_", "$curent_folder/$output_name", $curent_folder, $curent_folder] );
 		if(! -d "$outdir/$curent_folder"){
 			mkdir("$outdir/$curent_folder")
 		}
@@ -101,23 +101,24 @@ sub init_partial {
 	return $template->fill_in(HASH => \%template_variables);
 }
 
-sub init_index {
-	$template_file = "$TEMPLATE_FOLDER/index.html";
+sub prepare_view {
+	my ($view_name, $view_title, $is_home, $base_path_param) = @_;
+	$template_file = "$TEMPLATE_FOLDER/$view_name";
 	$template = Text::Template->new(TYPE => 'FILE',  SOURCE => $template_file);
 	%vars = ();
-	$vars{title} = "Seven Kingdoms Ancient Adversaries";
-	$vars{menu} = init_partial("_menu.html", (home => 1) );
+	$vars{base_path} = $base_path_param;
+	$vars{title} = $view_title;
+	$vars{menu} = init_partial("_menu.html", (home => $is_home, base_path => $base_path_param) );
+}
 
-
+sub init_index {
+	prepare_view("index.html", "Seven Kingdoms Ancient Adversaries",1 , $base_path);
 	$article_in = "$CONTENT_FOLDER/index.md";
 	$outfile = "$outdir/index.html";
 }
 
 sub init_article {
-	$template_file = "$TEMPLATE_FOLDER/article.html";
-	$template = Text::Template->new(TYPE => 'FILE',  SOURCE => $template_file);
-	%vars = ();
-	$vars{menu} = init_partial("_menu.html", (home => 0) );
+	prepare_view("article.html", "", 0, $base_path);
 	$article_in = "";
 	$outfile = "";
 }
@@ -133,6 +134,12 @@ sub next_article {
 	$vars{title} = $params->[0];
 	$article_in = "$CONTENT_FOLDER/$params->[1]";
 	$outfile = "$outdir/$params->[2]";
+	$article_folder = $params->[3];
+	# if(defined $article_folder){
+	# 	print("[INFO] FOLDER : $article_folder\n");
+	# 	print("[INFO] Preparing MENU on article \n");
+	# 	$vars{menu} = init_partial("_menu.html", (home => 0, relative_folder=>$article_folder) );
+	# }
 	
 	return 1;
 }
@@ -183,7 +190,6 @@ sub write_page {
 	}
 
 	if ($article_in ne "") {
-		print "Processing :$article_in \n";
 		my %article_in_matter = read_header($article_in);
 		# Open the config
 		#print "The Header is (YAML):  $article_in_matter{Header} \n";
@@ -219,6 +225,7 @@ sub write_page {
 		$vars{article} = markdown($testBody);
 		
 	}
+
 	$vars{head} = init_partial("_head.html", %vars);
 	my $fh;
 	if (!open($fh, ">", $outfile)) {
