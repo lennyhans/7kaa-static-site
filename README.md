@@ -35,4 +35,13 @@ or
 ```
 
 That should make appear the `out` directory which have all the files to host the static site, in fact you can check 
-the site opening every file or navigating by the web site itself
+the site opening every file or navigating by the web site itself on a hosting provider.
+
+## Develop
+
+If you want to run the site on your own (without bell and whistles) you can run specifying the base directory for links. 
+because the site is static so it needs to know where to look at.
+
+```shell
+./gensite.pl "file://$(pwd)/out/"
+```
