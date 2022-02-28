@@ -22,10 +22,10 @@ use warnings;
 use strict;
 
 use lib 'lib';
+use Cwd;
 use File::Basename;
 use Text::Template;
 use Text::Markdown 'markdown';
-
 use YAML::Tiny;
 use GreyMatterExtractor;
 
@@ -46,15 +46,23 @@ my $article_in;
 my $outfile;
 my $article_folder;
 my %vars;
-# TODO: Read the version from somewhere
-my $version = "2.15.4p1";
 
-my ($base_path) = @ARGV;
-if( !defined $base_path) {
-	$base_path = "/";
+my %default_vars = (
+	title => 'Seven Kindoms Ancient Adversaries',
+	description => 'Seven Kingdoms Ancient Adversaries is the real-time strategy game designed by Trevor Chan, now freely available and maintained by the community.',
+	base_path => '/',
+	forum_path => '/',
+	game_version => '2.15.4p1',
+);
+
+if (@ARGV && $ARGV[0] eq '-local') {
+	$default_vars{base_path} = "file://" . getcwd . "/out/";
 }
 
 my @articles = ();
+
+gen_download_index();
+gen_news_index();
 
 my @content_folder = get_content_directories($CONTENT_FOLDER);
 my @content_main_files = get_content_files($CONTENT_FOLDER);
@@ -93,6 +101,10 @@ while(next_article()) {
 
 exit 0;
 
+sub init_vars {
+	return %default_vars;
+}
+
 sub init_partial {
 	my ($partial_name, %template_variables) = @_;
 	my $template_file = "$TEMPLATE_FOLDER/$partial_name";
@@ -102,23 +114,22 @@ sub init_partial {
 }
 
 sub prepare_view {
-	my ($view_name, $view_title, $is_home, $base_path_param) = @_;
+	my ($view_name, $is_home) = @_;
 	$template_file = "$TEMPLATE_FOLDER/$view_name";
 	$template = Text::Template->new(TYPE => 'FILE',  SOURCE => $template_file);
-	%vars = ();
-	$vars{base_path} = $base_path_param;
-	$vars{title} = $view_title;
-	$vars{menu} = init_partial("_menu.html", (home => $is_home, base_path => $base_path_param) );
+	%vars = init_vars();
+	$vars{menu} = init_partial("_menu.html", (init_vars(), home => $is_home));
 }
 
 sub init_index {
-	prepare_view("index.html", "Seven Kingdoms Ancient Adversaries",1 , $base_path);
+	prepare_view("index.html", 1);
+	$vars{title} = "Seven Kingdoms Ancient Adversaries";
 	$article_in = "$CONTENT_FOLDER/index.md";
 	$outfile = "$outdir/index.html";
 }
 
 sub init_article {
-	prepare_view("article.html", "", 0, $base_path);
+	prepare_view("article.html", 0);
 	$article_in = "";
 	$outfile = "";
 }
@@ -142,6 +153,48 @@ sub next_article {
 	# }
 	
 	return 1;
+}
+
+sub gen_download_index {
+	my $fh;
+	if (!open($fh, ">", "src/content/download/index.md")) {
+		return;
+	}
+print $fh <<EOF;
+---
+title: 'Downloads'
+---
+
+## The latest version is [$default_vars{game_version}](v$default_vars{game_version}.html)
+
+### All versions
+EOF
+	foreach my $name (sort{$b cmp $a} map{basename($_,'.md')} glob("src/content/download/*.md")) {
+		if ($name eq 'index') {
+			next;
+		}
+		print $fh "[$name]($name.html)</br>\n";
+	}
+	close($fh);
+}
+
+sub gen_news_index {
+	my $fh;
+	if (!open($fh, ">", "src/content/news/index.md")) {
+		return;
+	}
+print $fh <<EOF;
+---
+title: 'News'
+---
+EOF
+	foreach my $name (sort{$b cmp $a} map{basename($_,'.md')} glob("src/content/news/*.md")) {
+		if ($name eq 'index') {
+			next;
+		}
+		print $fh "[$name]($name.html)</br>\n";
+	}
+	close($fh);
 }
 
 sub is_file_newer {
@@ -195,7 +248,7 @@ sub write_page {
 		#print "The Header is (YAML):  $article_in_matter{Header} \n";
 		my $yamls = undef;
 		# Prevent die thanks to https://stackoverflow.com/a/451236
-		eval { $yamls = YAML::Tiny->read_string( $article_in_matter{Header} ) }; warn "\t[WW] Unable to read YAML\n" if $@;
+		eval { $yamls = YAML::Tiny->read_string( $article_in_matter{Header} ) }; warn "\t[WW] Unable to read YAML for $article_in\n" if $@;
 		if( !defined $yamls )
 		{
 			print "\t[II] YAML Header is not defined\n";
@@ -204,7 +257,7 @@ sub write_page {
 
 		# title: 'Catapult III Speed Run'
 		# authors: '["Infectorpp", "Ra"]'
-		# created: '2016-06-07‎'
+		# created: '2016-06-07'
 		# updated : '2021-04-01'
 
 		my $testBody = $article_in_matter{Body};
@@ -215,7 +268,7 @@ sub write_page {
 			$vars{title} = $config->{title};
 
 		}else{
-			print "\t[II] No header Info (YAML)\n"
+			print "\t[II] No header Info (YAML) for $article_in\n"
 		}
 		#print "The Body is for $article_in is \n\n $testBody \n\n";
 		#print "OURDIR : $outdir";

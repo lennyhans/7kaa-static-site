@@ -1,36 +1,29 @@
-{
-$home_link = '';
-
-if( !defined $base_path ) { $base_path = ""; }
-my @links = ();
-#pop(@links);
-# push( @links, [ 'Home', "index.html", 'img/logo-semi-opacity.png' ]);
-push( @links, [ 'Play', "play.html"]);
-push( @links, [ 'Forums', "https://7kfans.com/forums"]);
-push( @links, [ 'Community', "community.html"]);
-push( @links, [ 'Downloads', "latest.html"]);
-
-$entry_list = '';
-foreach $i (@links) {
-$entry_list .= qq{<li class="button nav-button"><a class="nav-button-link" href="$base_path$i->[1]">$i->[0]</a></li>};
-
-}
-
-if ( $home == 0) {
-$home_link= qq{
-<li class="button nav-button-logo">
-  <a href="$base_path/index.html">
-    <img alt="Home" src="$base_path/img/logo-semi-opacity.png" height=60
-      style="position: absolute; float: left; top: 5px;" />
-  </a>
-</li>} ;
-}
-'' ;
-}
 <!-- SPACER -->
 <nav class="content-wrapper">
   <ul class="nav-group">
-    {$home_link}
-    {$entry_list}
+{
+    if (!$home) {
+      return <<EOF;
+    <li class="button nav-button-logo">
+      <a href="${base_path}index.html">
+        <img alt="Home" src="${base_path}img/logo-semi-opacity.png" height=60
+          style="position: absolute; float: left; top: 5px;" />
+      </a>
+    </li>
+EOF
+    }
+    return '';
+}    <li class="button nav-button">
+      <a class="nav-button-link" href="{$base_path}play.html">Play</a>
+    </li>
+    <li class="button nav-button">
+      <a class="nav-button-link" href="{$forum_path}forums">Forums</a>
+    </li>
+    <li class="button nav-button">
+      <a class="nav-button-link" href="{$base_path}community.html">Community</a>
+    </li>
+    <li class="button nav-button">
+      <a class="nav-button-link" href="{$base_path}download/">Downloads</a>
+    </li>
   </ul>
 </nav>
