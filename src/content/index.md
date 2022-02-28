@@ -23,4 +23,4 @@ We are working on a new content management system for the website, which will re
 
 Please update your reader by January 30th, because after that point, the old Wordpress feed will not be available.
 
-###[See More News](/news)
+###[See More News](news)
