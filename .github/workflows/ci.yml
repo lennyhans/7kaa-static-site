@@ -1,23 +1,21 @@
+## Thanks to https://dev.to/thibaultduponchelle/a-tour-of-perl-github-actions-44lp
 name: CI
 
 on:
-  push:
-    branches: [ main ]
   pull_request:
-    branches: [ main ]
+    branches: [main]
   workflow_dispatch:
 
 jobs:
-  lint:
+  Perl:
     runs-on: ubuntu-latest
-
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
       - uses: shogo82148/actions-setup-perl@v1
         with:
-          perl-version: '5.32'
-          
+          perl-version: "5.32"
+
       # Runs a single command using the runners shell
-      - name: Check
-        run: perl -c gensite.pl
+      - name: Check syntax
+        run: for f in `find . -name "*.pl"`; do perl -c $f; done
