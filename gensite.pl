@@ -179,8 +179,9 @@ EOF
 }
 
 sub gen_news_index {
+	my $news_base_path = "src/content/news";
 	my $fh;
-	if (!open($fh, ">", "src/content/news/index.md")) {
+	if (!open($fh, ">", "$news_base_path/index.md")) {
 		return;
 	}
 print $fh <<EOF;
@@ -188,12 +189,15 @@ print $fh <<EOF;
 title: 'News'
 ---
 EOF
-	foreach my $name (sort{$b cmp $a} map{basename($_,'.md')} glob("src/content/news/*.md")) {
+	print $fh "<div class='news-card--container'>\n";
+	foreach my $name (sort{$b cmp $a} map{basename($_,'.md')} glob("$news_base_path/*.md")) {
 		if ($name eq 'index') {
 			next;
 		}
-		print $fh "[$name]($name.html)</br>\n";
+		my %news_entry = process_content_file("$news_base_path/$name.md");
+		print $fh init_partial("_news_card.html", (spread_hash($news_entry{header}), content => $news_entry{body}));
 	}
+	print $fh "</div>\n";
 	close($fh);
 }
 
@@ -243,25 +247,10 @@ sub write_page {
 	}
 
 	if ($article_in ne "") {
-		my %article_in_matter = read_header($article_in);
-		# Open the config
-		#print "The Header is (YAML):  $article_in_matter{Header} \n";
-		my $yamls = undef;
-		# Prevent die thanks to https://stackoverflow.com/a/451236
-		eval { $yamls = YAML::Tiny->read_string( $article_in_matter{Header} ) }; warn "\t[WW] Unable to read YAML for $article_in\n" if $@;
-		if( !defined $yamls )
-		{
-			print "\t[II] YAML Header is not defined\n";
-		}
-		#print " The error is $! or YAML::Tiny->errstr \n";
+		my %article_processed =  process_content_file($article_in);
 
-		# title: 'Catapult III Speed Run'
-		# authors: '["Infectorpp", "Ra"]'
-		# created: '2016-06-07'
-		# updated : '2021-04-01'
-
-		my $testBody = $article_in_matter{Body};
-		my $config = $yamls->[0];	
+		$vars{article} = $article_processed{body};
+		my $config = $article_processed{header};	
 		# TODO: How to add automatically the values of the hash to the vars hash?
 		if ( defined $config->{title}){
 			#print "# YAML HEADER \n $config->{title}";
@@ -270,13 +259,6 @@ sub write_page {
 		}else{
 			print "\t[II] No header Info (YAML) for $article_in\n"
 		}
-		#print "The Body is for $article_in is \n\n $testBody \n\n";
-		#print "OURDIR : $outdir";
-		#if( -f "$outdir/" )
-
-		# TODO: Read format from original file (ex. could be a markdown or html)
-		$vars{article} = markdown($testBody);
-		
 	}
 
 	$vars{head} = init_partial("_head.html", %vars);
@@ -342,4 +324,43 @@ sub replace_extension_to_html {
 	# Try match and replace the last ".extension "
 	$output_name =~ s/(\.\w.$)\b/.html/io;
 	return $output_name;
+}
+
+sub process_content_file {
+	my ($input) = @_;
+
+	if ($input eq ""){
+		print "\t[WW] Unable to read $input\n";
+		return;
+	}
+	
+	my %input_matter = read_header($input);
+	my $yamls = undef;
+	# Prevent die thanks to https://stackoverflow.com/a/451236
+	eval { $yamls = YAML::Tiny->read_string( $input_matter{Header} ) }; warn "\t[WW] Unable to read YAML for $input\n" if $@;
+	if( !defined $yamls )
+	{
+		print "\t[II] YAML Header is not defined\n";
+	}
+
+	my $testBody = $input_matter{Body};
+	my $config = $yamls->[0];	
+	
+	if ( !defined $config ){
+		print "\t[II] No header Info (YAML) for $input\n";
+	}
+
+	# TODO: Read format from original file (ex. could be a markdown or html)
+	
+	return (
+		"header" => $config,
+		"body" => markdown($testBody),
+	);
+	
+}
+
+sub spread_hash {
+	# TODO: Validate hash
+	my ($input) = @_;
+	return %$input;
 }
