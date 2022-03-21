@@ -113,6 +113,13 @@ sub init_partial {
 	return $template->fill_in(HASH => \%template_variables);
 }
 
+sub init_partial_from_string {
+	my ($template_content, %template_variables) = @_;
+	my $template = Text::Template->new(TYPE => 'STRING',  SOURCE => $template_content);
+	
+	return $template->fill_in(HASH => \%template_variables);
+}
+
 sub prepare_view {
 	my ($view_name, $is_home) = @_;
 	$template_file = "$TEMPLATE_FOLDER/$view_name";
@@ -124,6 +131,7 @@ sub prepare_view {
 sub init_index {
 	prepare_view("index.html", 1);
 	$vars{title} = "Seven Kingdoms Ancient Adversaries";
+	$vars{latest_news} = init_partial("_news_index.html", (news_list => gen_news_card("src/content/news", 3)));
 	$article_in = "$CONTENT_FOLDER/index.md";
 	$outfile = "$outdir/index.html";
 }
@@ -189,18 +197,38 @@ print $fh <<EOF;
 title: 'News'
 ---
 EOF
+	my $news_list = gen_news_card($news_base_path);
+	print $fh init_partial("_news_index.html", (news_list => $news_list));
+	close($fh);
+}
+
+sub gen_news_card {
+	my ($path, $limit_count) = @_; 
+	my @news_files = get_sorted_files_by_name($path, ".md", "*.md");
+	my $limit_to = $#news_files;
+	my $iteration = 0;
+	if(!defined $limit_count){
+		$limit_count = 0;
+	}
+	if($limit_count > 0 ){
+		$limit_to = $limit_count;
+	}
 	my $news_list = '';
-	#print $fh "<div class='news-card--container'>\n";
-	foreach my $name (sort{$b cmp $a} map{basename($_,'.md')} glob("$news_base_path/*.md")) {
+	foreach my $name (@news_files) {
 		if ($name eq 'index') {
 			next;
 		}
-		my %news_entry = process_content_file("$news_base_path/$name.md");
+		last if($limit_to == $iteration );
+		my %news_entry = process_content_file("$path/$name.md");
 		$news_list = $news_list.init_partial("_news_card.html", (spread_hash($news_entry{header}), content => $news_entry{body}));
+		$iteration++;
 	}
-	
-	print $fh init_partial("_news_index.html", (news_list => $news_list));
-	close($fh);
+	return $news_list;
+}
+
+sub get_sorted_files_by_name {
+	my ($path, $filename, $filepattern) = @_;
+	return (sort{$b cmp $a} map{basename($_,'.md')} glob("$path/*.md"));
 }
 
 sub is_file_newer {
@@ -247,11 +275,10 @@ sub write_page {
 	if (is_up_to_date($outfile)) {
 		return;
 	}
-
 	if ($article_in ne "") {
 		my %article_processed =  process_content_file($article_in);
 
-		$vars{article} = $article_processed{body};
+		$vars{article} = init_partial_from_string($article_processed{body}, %vars);
 		my $config = $article_processed{header};	
 		# TODO: How to add automatically the values of the hash to the vars hash?
 		if ( defined $config->{title}){
