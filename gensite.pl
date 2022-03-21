@@ -189,15 +189,17 @@ print $fh <<EOF;
 title: 'News'
 ---
 EOF
-	print $fh "<div class='news-card--container'>\n";
+	my $news_list = '';
+	#print $fh "<div class='news-card--container'>\n";
 	foreach my $name (sort{$b cmp $a} map{basename($_,'.md')} glob("$news_base_path/*.md")) {
 		if ($name eq 'index') {
 			next;
 		}
 		my %news_entry = process_content_file("$news_base_path/$name.md");
-		print $fh init_partial("_news_card.html", (spread_hash($news_entry{header}), content => $news_entry{body}));
+		$news_list = $news_list.init_partial("_news_card.html", (spread_hash($news_entry{header}), content => $news_entry{body}));
 	}
-	print $fh "</div>\n";
+	
+	print $fh init_partial("_news_index.html", (news_list => $news_list));
 	close($fh);
 }
 
