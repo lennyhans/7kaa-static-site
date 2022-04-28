@@ -113,6 +113,13 @@ sub init_partial {
 	return $template->fill_in(HASH => \%template_variables);
 }
 
+sub init_partial_from_string {
+	my ($template_content, %template_variables) = @_;
+	my $template = Text::Template->new(TYPE => 'STRING',  SOURCE => $template_content);
+	
+	return $template->fill_in(HASH => \%template_variables);
+}
+
 sub prepare_view {
 	my ($view_name, $is_home) = @_;
 	$template_file = "$TEMPLATE_FOLDER/$view_name";
@@ -124,6 +131,7 @@ sub prepare_view {
 sub init_index {
 	prepare_view("index.html", 1);
 	$vars{title} = "Seven Kingdoms Ancient Adversaries";
+	$vars{latest_news} = init_partial("_news_index.html", (news_list => gen_news_card("src/content/news", 3)));
 	$article_in = "$CONTENT_FOLDER/index.md";
 	$outfile = "$outdir/index.html";
 }
@@ -179,8 +187,9 @@ EOF
 }
 
 sub gen_news_index {
+	my $news_base_path = "src/content/news";
 	my $fh;
-	if (!open($fh, ">", "src/content/news/index.md")) {
+	if (!open($fh, ">", "$news_base_path/index.md")) {
 		return;
 	}
 print $fh <<EOF;
@@ -188,13 +197,38 @@ print $fh <<EOF;
 title: 'News'
 ---
 EOF
-	foreach my $name (sort{$b cmp $a} map{basename($_,'.md')} glob("src/content/news/*.md")) {
+	my $news_list = gen_news_card($news_base_path);
+	print $fh init_partial("_news_index.html", (news_list => $news_list));
+	close($fh);
+}
+
+sub gen_news_card {
+	my ($path, $limit_count) = @_; 
+	my @news_files = get_sorted_files_by_name($path, ".md", "*.md");
+	my $limit_to = $#news_files;
+	my $iteration = 0;
+	if(!defined $limit_count){
+		$limit_count = 0;
+	}
+	if($limit_count > 0 ){
+		$limit_to = $limit_count;
+	}
+	my $news_list = '';
+	foreach my $name (@news_files) {
 		if ($name eq 'index') {
 			next;
 		}
-		print $fh "[$name]($name.html)</br>\n";
+		last if($limit_to == $iteration );
+		my %news_entry = process_content_file("$path/$name.md");
+		$news_list = $news_list.init_partial("_news_card.html", (spread_hash($news_entry{header}), content => $news_entry{body}));
+		$iteration++;
 	}
-	close($fh);
+	return $news_list;
+}
+
+sub get_sorted_files_by_name {
+	my ($path, $filename, $filepattern) = @_;
+	return (sort{$b cmp $a} map{basename($_,'.md')} glob("$path/*.md"));
 }
 
 sub is_file_newer {
@@ -241,27 +275,11 @@ sub write_page {
 	if (is_up_to_date($outfile)) {
 		return;
 	}
-
 	if ($article_in ne "") {
-		my %article_in_matter = read_header($article_in);
-		# Open the config
-		#print "The Header is (YAML):  $article_in_matter{Header} \n";
-		my $yamls = undef;
-		# Prevent die thanks to https://stackoverflow.com/a/451236
-		eval { $yamls = YAML::Tiny->read_string( $article_in_matter{Header} ) }; warn "\t[WW] Unable to read YAML for $article_in\n" if $@;
-		if( !defined $yamls )
-		{
-			print "\t[II] YAML Header is not defined\n";
-		}
-		#print " The error is $! or YAML::Tiny->errstr \n";
+		my %article_processed =  process_content_file($article_in);
 
-		# title: 'Catapult III Speed Run'
-		# authors: '["Infectorpp", "Ra"]'
-		# created: '2016-06-07'
-		# updated : '2021-04-01'
-
-		my $testBody = $article_in_matter{Body};
-		my $config = $yamls->[0];	
+		$vars{article} = init_partial_from_string($article_processed{body}, %vars);
+		my $config = $article_processed{header};	
 		# TODO: How to add automatically the values of the hash to the vars hash?
 		if ( defined $config->{title}){
 			#print "# YAML HEADER \n $config->{title}";
@@ -270,13 +288,6 @@ sub write_page {
 		}else{
 			print "\t[II] No header Info (YAML) for $article_in\n"
 		}
-		#print "The Body is for $article_in is \n\n $testBody \n\n";
-		#print "OURDIR : $outdir";
-		#if( -f "$outdir/" )
-
-		# TODO: Read format from original file (ex. could be a markdown or html)
-		$vars{article} = markdown($testBody);
-		
 	}
 
 	$vars{head} = init_partial("_head.html", %vars);
@@ -342,4 +353,43 @@ sub replace_extension_to_html {
 	# Try match and replace the last ".extension "
 	$output_name =~ s/(\.\w.$)\b/.html/io;
 	return $output_name;
+}
+
+sub process_content_file {
+	my ($input) = @_;
+
+	if ($input eq ""){
+		print "\t[WW] Unable to read $input\n";
+		return;
+	}
+	
+	my %input_matter = read_header($input);
+	my $yamls = undef;
+	# Prevent die thanks to https://stackoverflow.com/a/451236
+	eval { $yamls = YAML::Tiny->read_string( $input_matter{Header} ) }; warn "\t[WW] Unable to read YAML for $input\n" if $@;
+	if( !defined $yamls )
+	{
+		print "\t[II] YAML Header is not defined\n";
+	}
+
+	my $testBody = $input_matter{Body};
+	my $config = $yamls->[0];	
+	
+	if ( !defined $config ){
+		print "\t[II] No header Info (YAML) for $input\n";
+	}
+
+	# TODO: Read format from original file (ex. could be a markdown or html)
+	
+	return (
+		"header" => $config,
+		"body" => markdown($testBody),
+	);
+	
+}
+
+sub spread_hash {
+	# TODO: Validate hash
+	my ($input) = @_;
+	return %$input;
 }

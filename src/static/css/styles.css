@@ -27,15 +27,30 @@ Main Styles
 }
 
 html, body, main {
-	height: 100%;
-	margin: 0px;
+    height: 100%;
+    margin: 0px;
 }
 
 body {
     line-height: 1.7em;
     color: #303030;
     font-size: 13px;
-    font-family: 'Cinzel', serif;    
+    font-family: 'Cinzel', serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    margin: 0px 0px 0.5em;
+    font-weight: 400;
+    line-height: 1.2;
+}
+h1 {
+    font-size: 2rem;
+}
+h2 {
+    font-size: 1.8rem
+}
+h3 {
+    font-size: 1.6rem
 }
 
 .main-container {
@@ -51,34 +66,35 @@ body {
     background: url('../img/background-noise.svg');
 }
 
-.secondary-container  p,
-.secondary-container  a,
-.secondary-container  h1,
-.secondary-container  h2,
-.secondary-container  h3 {
+.secondary-container p,
+.secondary-container a,
+.secondary-container h1,
+.secondary-container h2,
+.secondary-container h3 {
     color: #000;
     opacity: 0.85;
 }
-.secondary-container  a {
+
+.secondary-container a {
     color: #42b3b8;
 }
 
-.secondary-container  p,
-.secondary-container  a {
+.secondary-container p,
+.secondary-container a {
     font-family: Noto, Roboto, Verdana, Helvetica, Sans, sans-serif;
 }
 
-.main-img{
-	width: 100%;
-	max-width: 100%;
-	height: auto;
+.main-img {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
 }
 
 .button {
     display: inline-block;
 }
 
-.button > small {
+.button>small {
     font-size: .6em;
     display: block;
     padding: 0;
@@ -102,10 +118,12 @@ body {
     padding: 0px;
     color: rgba(0, 0, 0, 0.85);
 }
+
 .nav-button-logo {
     min-width: 210px;
     min-height: 38px;
 }
+
 .nav-button-link {
     color: rgba(0, 0, 0, 0.85);
     text-decoration: none;
@@ -114,8 +132,9 @@ body {
 }
 
 a {
-	text-decoration: none;
+    text-decoration: none;
 }
+
 a.button-primary {
     color: #000;
     display: inline-block;
@@ -128,16 +147,16 @@ a.button-primary {
 }
 
 .splash-container {
-/*    overflow: hidden;*/
-position: relative;
-opacity: 1;
-background-attachment: fixed;
-background-position: center center;
-background-repeat: no-repeat;
-background-size: cover;
-background-color: rgb(51, 51, 51);
-min-height: 93%;
-background-size: auto;
+    /*    overflow: hidden;*/
+    position: relative;
+    opacity: 1;
+    background-attachment: fixed;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: rgb(51, 51, 51);
+    min-height: 93%;
+    background-size: auto;
 }
 
 .splash {
@@ -149,46 +168,48 @@ background-size: auto;
     text-transform: uppercase;
 }
 
-.in-game-screen{
-	z-index: -1;
-	position: fixed;
-	left: 0;
-	right: 0;
-	top: 0;
+.in-game-screen {
+    z-index: -1;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
 }
 
-.in-game-screen > img {
-	width: auto;
-	min-height: 80%;
-	height: 80%;
-	display: block;
-	margin-left: auto;
+.in-game-screen>img {
+    width: auto;
+    min-height: 80%;
+    height: 80%;
+    display: block;
+    margin-left: auto;
     margin-right: auto;
-    box-shadow: 0 0 50px rgba(0,0,0,.4);
+    box-shadow: 0 0 50px rgba(0, 0, 0, .4);
 }
 
 .splash-head {
     font-size: 20px;
     font-weight: bold;
     color: white;
-    
+
     padding: 0 1.6em;
     font-weight: 100;
     border-radius: 5px;
     line-height: 1em;
     margin: 0px 0px 0.5em;
 }
+
 .brief-desc {
     width: 100%;
     color: rgb(255, 255, 255);
-    background-color: rgba(0,0,0,.4);
+    background-color: rgba(0, 0, 0, .4);
     margin: auto;
     padding: 1em 0;
     border-radius: 1px;
     font-weight: 400;
     line-height: 1.2;
 }
-.brief-desc > p{
+
+.brief-desc>p {
     margin: 0;
     opacity: .8;
 }
@@ -200,6 +221,7 @@ background-size: auto;
     font-weight: 300;
     padding: 0.2em 0.5em;
 }
+
 ul.content-wrapper {
     margin: 0px;
     padding: 0px;
@@ -213,13 +235,13 @@ ul.content-wrapper {
 
 
 .content-left, .content-right {
-	flex: 100%;
-	display: flex;
-	flex-direction: column;
+    flex: 100%;
+    display: flex;
+    flex-direction: column;
 }
 
 .content-right {
-	flex-direction: column-reverse;
+    flex-direction: column-reverse;
 }
 
 /****************
@@ -230,18 +252,21 @@ Custom Scrollbar
 ::-webkit-scrollbar {
     width: 13px;
 }
+
 /* Track */
 ::-webkit-scrollbar-track {
-    box-shadow: inset 0 0 5px grey; 
+    box-shadow: inset 0 0 5px grey;
     border-radius: 15px;
 }
+
 /* Handle */
 ::-webkit-scrollbar-thumb {
-    background: antiquewhite; 
+    background: antiquewhite;
     border-radius: 10px;
     background-image: url("../img/scrolbarpic.svg");
     box-shadow: 0 0 2px grey;
 }
+
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
     background-size: 24px;
@@ -260,95 +285,148 @@ Responsive Styles
 
     a.button-primary {
         width: 16em;
-/*        font-size: 1.5em;*/
-    }
-    .nav-button {
     }
 
     .splash-head {
         font-size: 250%;
     }
-    .main-img{
+
+    .main-img {
         width: 80%;
     }
-    .brief-desc{
+
+    .brief-desc {
         width: 80%
     }
+
     .content-left, .content-right {
-			flex: 50%;
-			flex-direction: row;
-			justify-content: center;
+        flex: 50%;
+        flex-direction: row;
+        justify-content: center;
     }
+
     .content-right {
         text-align: right;
         flex-flow: row-reverse;
     }
-    
-    .content-wrapper {
-    }
-    
-    .splash-container {
-    }
-
 }
 
 /* -- DESKTOP  -- */
 @media (min-width: 1366px) {
 
-    .brief-desc{
+    .brief-desc {
         width: 50%
     }
+
     .splash-head {
         font-size: 300%;
     }
-    .main-img{
-			width: auto;
-			min-width: 70%;
-    }
-    .in-game-screen > img {
-			width: auto;
-			max-width :100%;
-			height: auto;
-    }
-}
 
+    .main-img {
+        width: auto;
+        min-width: 70%;
+    }
 
-@media (max-height: 400px) {
-	.splash-container {
-/*		overflow: unset; */
-	}
-	.content-wrapper {
-/*		min-height: unset;*/
-	}
+    .in-game-screen>img {
+        width: auto;
+        max-width: 100%;
+        height: auto;
+    }
 }
 
 .separator {
-		width: 100%;
-background: antiquewhite url("../img/navbar.svg") repeat-x scroll left center / contain;
-		left: 0px;
-		min-height: 4.5em;
-		bottom: 4.5em;
-		position:relative;
-	}
+    width: 100%;
+    background: antiquewhite url("../img/navbar.svg") repeat-x scroll left center / contain;
+    left: 0px;
+    min-height: 4.5em;
+    bottom: 4.5em;
+    position: relative;
+}
 
 
 .content p, .content a, .content h1, .content h2, .content h3 {
     color: rgb(0, 0, 0);
     opacity: 0.85;
 }
-h1, h2, h3, h4, h5, h6 {
-    margin: 0px 0px 0.5em;
-    font-weight: 400;
-    line-height: 1.2;
-}
+
 .content p, .content a {
     font-family: Noto, Roboto, Verdana, Helvetica, Sans, sans-serif;
 }
+
 .content p, .content a, .content h1, .content h2, .content h3 {
     color: rgb(0, 0, 0);
     opacity: 0.85;
 
 }
+
+.content h2 {
+    font-size: 1.5rem;
+}
+.content h3 {
+    font-size: 1.4rem;
+}
+
 .content a {
-    color: rgb(66, 179, 184);
+    color: #574610
+}
+
+
+/**
+* NEWS CARD
+*/
+.news-card--container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.news--content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1.5rem 2.4rem;
+    background-color: #f5f5f5;
+    box-shadow: 1px 1px 10px 2px rgba(0, 0, 0, 0.2);
+    margin: 1rem;
+    flex: 1 600px;
+}
+
+.news--content:nth-of-type(1) {
+    flex: 1 max-content;
+}
+
+.news--author {
+    font-family: 'Cinzel', Sans;
+    font-size: 1rem !important;
+    margin-bottom: 1rem;
+}
+
+.news--title-primary {
+    font-family: 'Cinzel', Sans;
+    font-size: 1.6rem !important;
+}
+
+.news--title-secondary {
+    font-family: 'Cinzel', Sans;
+    font-size: 1.13rem;
+}
+
+.news--content p {
+    margin: 0 0 14px 0;
+}
+
+.news--content p,
+.news--content li,
+.news--content a {
+    font-family: 'Accanthis', Sans;
+    font-size: large;
+}
+
+.news--content a {
+    font-weight: bold;
+}
+
+.news--date {
+    text-align: right;
+    align-self: end;
+    margin-top: auto;
 }
