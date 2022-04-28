@@ -285,10 +285,7 @@ Responsive Styles
 
     a.button-primary {
         width: 16em;
-        /*        font-size: 1.5em;*/
     }
-
-    .nav-button {}
 
     .splash-head {
         font-size: 250%;
@@ -312,11 +309,6 @@ Responsive Styles
         text-align: right;
         flex-flow: row-reverse;
     }
-
-    .content-wrapper {}
-
-    .splash-container {}
-
 }
 
 /* -- DESKTOP  -- */
@@ -339,17 +331,6 @@ Responsive Styles
         width: auto;
         max-width: 100%;
         height: auto;
-    }
-}
-
-
-@media (max-height: 400px) {
-    .splash-container {
-        /*		overflow: unset; */
-    }
-
-    .content-wrapper {
-        /*		min-height: unset;*/
     }
 }
 
