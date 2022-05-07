@@ -6,7 +6,7 @@ Seven Kingdoms Ancient Adversaries is the real-time strategy game designed by Tr
 
 The game is compatible with Windows, MacOS and Linux.
 
-###[Learn more about the game](about.html)
+#### [Learn more about the game](about.html)
 <br/>
 
 -------
@@ -16,4 +16,4 @@ The game is compatible with Windows, MacOS and Linux.
 
 {$latest_news}
 
-###[See More News](news)
+### [See More News](news)
