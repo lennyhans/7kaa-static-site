@@ -38,3 +38,8 @@ inc/
 
 # Out dir script
 out/
+
+# Remove some generated content
+src/content/news/index.md
+src/content/download/index.md
+src/content/community/index.md
