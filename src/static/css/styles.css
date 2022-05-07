@@ -231,7 +231,7 @@ ul.content-wrapper {
 }
 
 .content {
-    padding: 0.5em 5em;
+    padding: 0.5em 0em;
     position: relative;
     z-index: 1;
 }
@@ -301,7 +301,9 @@ Responsive Styles
     .brief-desc {
         width: 80%
     }
-
+    .content {
+        padding: 0.5em 5em;
+    }
     .content-left, .content-right {
         flex: 50%;
         flex-direction: row;
