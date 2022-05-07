@@ -425,7 +425,9 @@ Responsive Styles
     font-family: 'Accanthis', Sans;
     font-size: large;
 }
-
+.news--content p {
+    text-align: justify;
+}
 .news--content a {
     font-weight: bold;
 }
