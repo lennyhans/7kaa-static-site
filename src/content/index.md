@@ -14,6 +14,8 @@ The game is compatible with Windows, MacOS and Linux.
 <br/>
 ## Latest News
 
+RSS Feed: [https://7kfans.com/rss.xml](https://7kfans.com/rss.xml)
+
 {$latest_news}
 
 ### [See More News](news)
