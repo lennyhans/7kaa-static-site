@@ -52,7 +52,7 @@ my %default_vars = (
 	description => 'Seven Kingdoms Ancient Adversaries is the real-time strategy game designed by Trevor Chan, now freely available and maintained by the community.',
 	base_path => '/',
 	forum_path => '/',
-	game_version => '2.15.4p1',
+	game_version => '2.15.5',
 );
 
 if (@ARGV && $ARGV[0] eq '-local') {
