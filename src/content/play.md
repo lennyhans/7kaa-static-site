@@ -1,7 +1,7 @@
 ---
 title: 'Play Seven Kingdoms'
 ---
-# Play Seven Kingdoms
+
 ## [#](#with-your-friends) With your friends
 The game supports playing with up to 7 players over the internet. Are you ready to try your skill against other opponents? You'll have many of your memorable moments in the game when playing with others.
 
