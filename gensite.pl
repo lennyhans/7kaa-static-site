@@ -154,6 +154,11 @@ sub next_article {
 	$article_in = "$CONTENT_FOLDER/$params->[1]";
 	$outfile = "$outdir/$params->[2]";
 	$article_folder = $params->[3];
+	$vars{category} = '';
+	if( defined $article_folder ) {
+	    $vars{category} = $article_folder;
+	}
+	
 	# if(defined $article_folder){
 	# 	print("[INFO] FOLDER : $article_folder\n");
 	# 	print("[INFO] Preparing MENU on article \n");
@@ -282,8 +287,17 @@ sub write_page {
 		my $config = $article_processed{header};	
 		# TODO: How to add automatically the values of the hash to the vars hash?
 		if ( defined $config->{title}){
-			#print "# YAML HEADER \n $config->{title}";
-			$vars{title} = $config->{title};
+		    #print "# YAML HEADER \n $config->{title}";
+		    $vars{title} = $config->{title};
+		    $vars{slug} = $config->{slug};
+		    ## TODO: Find a better way to draw per page custom variables
+		    if ( defined $vars{category} && $vars{category} eq 'news' ){
+			$vars{date} = $config->{date};
+			$vars{author} = $config->{author};
+		    } else {
+			$vars{date} = undef;
+			$vars{author} = undef;
+		    }
 
 		}else{
 			print "\t[II] No header Info (YAML) for $article_in\n"

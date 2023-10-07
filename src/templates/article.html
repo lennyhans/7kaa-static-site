@@ -20,13 +20,38 @@ Copyright 2021 Lenny Andreu
 <head>
     {$head}
 </head>
+{
+$has_author = defined $author;
+$has_date = defined $date;
 
+$render_author = '';
+$render_date = '';
+
+if ($has_author == 1) {
+
+    $render_author =<<EOF;
+<h3 class="author">by \@$author</h3>
+EOF
+							    
+}
+if( $has_date == 1){
+      $render_date =<<EOF;
+<div class="date" title="$date">Posted on $date</div>
+EOF
+}
+
+'';
+}
 <body>
     <div class="main-container">
         {$menu}
         <main>
-            <section class=content>
-                {$article}</section>
+          <section class="content">
+	    <h1>{$title}</h1>
+	    {$render_author}
+	    {$render_date}
+            {$article}
+	  </section>
         </main>
     </div>
 </body>
