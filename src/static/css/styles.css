@@ -437,3 +437,42 @@ Responsive Styles
     align-self: end;
     margin-top: auto;
 }
+
+/**
+* Download item
+*/
+
+.download--content ul {
+    list-style-type: none;
+    padding:0 .8rem;
+}
+
+.download--content li {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1.5rem 2.4rem;
+    background-color: #f5f5f5;
+    box-shadow: 1px 1px 10px 2px rgba(0, 0, 0, 0.2);
+    margin: 1rem;
+    flex: 1 600px;
+}
+
+.download--content li:first-child::before {
+    content: "WINDOWS ICON";
+}
+
+.download--content li:nth-of-type(2)::before  {
+    content: "SOURCE";
+}
+
+.download--content li:nth-of-type(3) ::before {
+    content: "MUSIC ";
+}
+
+.download--content li:nth-of-type(4)::before {
+    content: "MUSIC TAR";
+}
+.download--content li:nth-of-type(5)::before {
+    content: "MANUAL";
+}
