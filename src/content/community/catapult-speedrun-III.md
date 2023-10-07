@@ -4,7 +4,6 @@ authors: '["Infectorpp", "Ra"]'
 created: '2016-06-07‎'
 updated : '2021-04-01'
 ---
-## Catapult III Speed Run
 
 The primary goal of this strategy is to quickly gain the technology for Catapult Mark III and to quickly build an army of them. This guide uses inns for population growth and employing skilled workers. This strategy is feasible even if you start with a small treasure but is slightly different according to a few settings such as starting population, income, amount of AI, and AI aggressiveness. Other than that, you should play the game as usual.
 

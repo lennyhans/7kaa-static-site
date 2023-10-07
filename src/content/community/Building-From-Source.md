@@ -4,7 +4,6 @@ authors: '["the3dfxdude"]'
 created: '2012-08-23'
 updated : '2019-04-04'
 ---
-# Building From Source
 
 ## Introduction
 
