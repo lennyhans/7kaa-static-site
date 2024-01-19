@@ -186,7 +186,7 @@ EOF
 		if ($name eq 'index') {
 			next;
 		}
-		print $fh "[$name]($name.html)</br>\n";
+		print $fh "[$name]($name.html)<br>\n";
 	}
 	close($fh);
 }
