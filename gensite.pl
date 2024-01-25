@@ -183,11 +183,12 @@ title: 'Downloads'
 ### All versions
 EOF
 	foreach my $name (sort{$b cmp $a} map{basename($_,'.md')} glob("src/content/download/*.md")) {
-		if ($name eq 'index') {
+		if ($name eq 'index' || $name eq 'all') {
 			next;
 		}
 		print $fh "[$name]($name.html)<br>\n";
 	}
+	print $fh "\n[Links to all files](all.html)\n";
 	close($fh);
 }
 
