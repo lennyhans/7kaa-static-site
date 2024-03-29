@@ -181,7 +181,7 @@ print $fh <<EOF;
 ---
 title: 'Get the latest version of the game'
 ---
-
+## Download seven kingdoms for Windows, Linux and MacOS, and start play with your friends (or foes)
 ${latest_download_content}
 ### Not the version you are looking for?
 <details>
