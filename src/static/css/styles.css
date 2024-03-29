@@ -231,8 +231,9 @@ ul.content-wrapper {
 }
 
 .content {
-    padding: 0.5em 0em;
+    padding: 1em 2em;
     position: relative;
+    margin:auto;
     z-index: 1;
 }
 
@@ -274,7 +275,8 @@ Responsive Styles
         width: 80%
     }
     .content {
-        padding: 0.5em 5em;
+        padding: 1.5em 5em;
+        max-width: 75rem;
     }
     .content-left, .content-right {
         flex: 50%;
