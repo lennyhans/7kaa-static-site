@@ -173,22 +173,32 @@ sub gen_download_index {
 	if (!open($fh, ">", "src/content/download/index.md")) {
 		return;
 	}
+	my $latest_version_file = "v$default_vars{game_version}";
+	my $latest_download_content = '';
+	my %latest_download_data = process_content_file("src/content/download/$latest_version_file.md");
+	$latest_download_content = $latest_download_content.init_partial("_download_entry.html", (spread_hash($latest_download_data{header}), content => $latest_download_data{body}));
 print $fh <<EOF;
 ---
-title: 'Downloads'
+title: 'Get the latest version of the game'
 ---
-
-## The latest version is [$default_vars{game_version}](v$default_vars{game_version}.html)
-
-### All versions
+## Download seven kingdoms for Windows, Linux and MacOS, and start play with your friends (or foes)
+${latest_download_content}
+### Not the version you are looking for?
+<details>
+  <summary>Older versions</summary>
+ 
 EOF
 	foreach my $name (sort{$b cmp $a} map{basename($_,'.md')} glob("src/content/download/*.md")) {
-		if ($name eq 'index' || $name eq 'all') {
+		# if ($name eq 'index' || $name eq 'all') {
+		if ($name eq 'index' or $name eq  $latest_version_file or $name eq 'all') {
 			next;
 		}
 		print $fh "[$name]($name.html)<br>\n";
 	}
 	print $fh "\n[Links to all files](all.html)\n";
+	print $fh <<EOF;
+</details>
+EOF
 	close($fh);
 }
 
