@@ -411,3 +411,108 @@ Responsive Styles
     align-self: end;
     margin-top: auto;
 }
+
+/**
+* Download item
+*/
+.download--content h2, h4, h3, details {
+    text-align: center;
+}
+
+.download--content h2::before {
+    width: 3rem;
+    height: 3rem;
+    background-clip: border-box;
+    padding: 1rem;
+    margin: auto;
+    background-size: contain;
+    background-repeat: no-repeat;
+    display: block;
+    content:"";
+    background-image: url("/img/download-square-outline.svg");
+}
+.download--content ul {
+    list-style-type: none;
+    padding:0 .8rem;
+}
+
+.download--content li {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    background-color: #f5f5f5;
+    box-shadow: 1px 1px 2px 2px rgba(0, 0, 0, 0.2);
+    transition-property: box-shadow;
+    transition-duration: 250ms;
+    transition-timing-function: cubic-bezier(0.19, 1, 0.22, 1);
+    margin: 1rem auto;
+    flex: 1 600px;
+    max-width: 650px;
+    position: relative;
+    height: 7rem;
+    justify-content: center;
+}
+
+.download--content li:hover {
+    box-shadow: 1px 1px 8px 2px rgba(0, 0, 0, 0.2);
+}
+.download--content li:active, .download--content li:focus {
+    box-shadow: 1px 1px 12px 2px rgba(0, 0, 0, 0.2);
+}
+
+.download--content li em, 
+.download--content li a {
+    width: 100%;
+    text-align: left;
+    padding-left: 10rem;
+}
+
+.download--content li a::before {
+    content: "";
+    display: inline-block;
+    width: 5rem;
+    height: 5rem;
+    background-clip: border-box;
+    background-size: contain;
+    background-repeat: no-repeat;
+    position: absolute;
+    left: 2.4rem;
+    top: 1rem;
+}
+.download--content li:first-child a::before {
+    background-image: url("/img/windows.svg");
+}
+
+.download--content li:nth-of-type(2) a::before  {
+    background-image: url("/img/code.svg");
+}
+
+.download--content li:nth-of-type(3) a::before {
+    background-image: url("/img/music-1.svg");
+}
+
+.download--content li:nth-of-type(4) a::before {
+    background-image: url("/img/music-1.svg");
+}
+.download--content li:nth-of-type(5) a::before {
+    background-image: url("/img/book.svg");
+}
+
+/* summary {
+    border-radius: 50%;
+    border-width: .2rem;
+    border-style: solid;
+    width: 4rem;
+}
+summary::marker{
+    content: "";
+}
+summary::after{
+    content: "";
+    background-image: url("/img/nav-arrow-down.svg");
+    display: inline-block;
+    width: 3rem;
+    height: 3rem;
+    background-size: contain;
+    background-repeat: no-repeat;
+} */
